@@ -19,17 +19,23 @@ function promptManager(){
             {
                 type: 'input',
                 message: `What is the Team Manager's id number?`,
-                name: 'managerName',
+                name: 'managerId',
             },
             {
                 type: 'input',
                 message: `What is the Team Manager's email?`,
-                name: 'managerName',
+                name: 'managerEmail',
             },
             {
                 type: 'input',
                 message: `What is the Team Manager's office number?`,
-                name: 'managerName',
+                name: 'managerOfficenumber',
             },
         ])
+        .then((response) => {
+            var manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.managerOfficenumber);
+            employees.push(manager);
+
+            choicePrompts();
+})
 }
