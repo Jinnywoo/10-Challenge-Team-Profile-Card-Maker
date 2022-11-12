@@ -70,34 +70,55 @@ function promptEngineer(){
             choicePrompts();
 })
 }
-function promptManager(){
+function promptIntern(){
     inquirer
         .prompt([
             {
                 type: 'input',
-                message: `What is the Team Manager's name?`,
-                name: 'managerName',
+                message: `What is the Intern's name?`,
+                name: 'internName',
             },
             {
                 type: 'input',
-                message: `What is the Team Manager's id number?`,
-                name: 'managerId',
+                message: `What is the Intern's id number?`,
+                name: 'internId',
             },
             {
                 type: 'input',
-                message: `What is the Team Manager's email?`,
-                name: 'managerEmail',
+                message: `What is the Intern's email?`,
+                name: 'internEmail',
             },
             {
                 type: 'input',
-                message: `What is the Team Manager's office number?`,
-                name: 'managerOfficenumber',
+                message: `What is the Interns's school?`,
+                name: 'internSchool',
             },
         ])
         .then((response) => {
-            var manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.managerOfficenumber);
-            employees.push(manager);
+            var intern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool);
+            employees.push(intern);
 
             choicePrompts();
 })
+}
+
+function choicePrompts(){
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                message: 'Would you like to add another team member?',
+                choices: ['Engineer', 'Intern', 'No'],
+                name: 'addEmployee'
+            },
+        ])
+        .then((response)=>{
+            if (response.addEmployee === 'Engineer'){
+                promptEngineer();
+            }else if(response.addEmployee === 'Intern'){
+                promptIntern();
+            }else{
+                generateHTML();
+            }
+        })
 }
